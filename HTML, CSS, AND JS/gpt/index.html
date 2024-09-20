@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Quiz</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div id="quiz-container">
+		<h1>Quiz</h1>
+		<p id="question">Question goes here</p>
+		<form id="quiz-form">
+			<label>
+				<input type="radio" name="answer" value="option1">
+				<span id="option1">Option 1</span>
+			</label>
+			<label>
+				<input type="radio" name="answer" value="option2">
+				<span id="option2">Option 2</span>
+			</label>
+			<label>
+				<input type="radio" name="answer" value="option3">
+				<span id="option3">Option 3</span>
+			</label>
+			<label>
+				<input type="radio" name="answer" value="option4">
+				<span id="option4">Option 4</span>
+			</label>
+			<button type="submit" id="submit-btn">Submit</button>
+		</form>
+		<p id="feedback"></p>
+	</div>
+
+	<script src="script.js"></script>
+</body>
+</html>
