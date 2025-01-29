@@ -4,8 +4,9 @@ public class Encapsulation{
         Scanner s = new Scanner(System.in);
         System.out.println();
         Object obj = new Object("Yasuo", 69, 'M');
-        obj.setname("Yas");
-        System.out.println(obj.getname());
+
+        obj.setname("Yas");//return type-void with parameter
+        System.out.println(obj.getname());//return type using print
 
         Object oobj = new Object("Zed", 96, 'M');
         

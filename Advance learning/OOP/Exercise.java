@@ -3,14 +3,14 @@ public class Exercise{
     public static void main(String[] args){
         Scanner s = new Scanner(System.in);
         System.out.println();
-        Student sti = new Student("Timothy","Alvarez",1,"BSIT",1,95,96);
+        Students sti = new Students("Timothy","Alvarez",1,"BSIT",1,95,96);
         System.out.println();
         sti.introduce();
-        sti.grade();
+        //sti.grade();
     }
 
 }
-class Student{
+class Students{
     String fname;
     String lname;
     int yr;
@@ -18,7 +18,7 @@ class Student{
     int section;
     int midg;
     int finalg;
-    Student(String fname, String lname, int yr, String course, int section, int midg, int finalg){
+    Students(String fname, String lname, int yr, String course, int section, int midg, int finalg){
         this.fname = fname;
         this.lname = lname;
         this.yr = yr;
