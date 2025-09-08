@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Data Input</title>
+    <!-- Use Tailwind CSS for quick styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm w-full">
+        <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">Enter Your Data</h1>
+        <form id="userDataForm" class="space-y-4">
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" id="name" name="name" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" id="email" name="email" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+            <div class="pt-4">
+                <button type="submit"
+                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Save Data
+                </button>
+            </div>
+        </form>
+        <div id="messageBox" class="mt-6 p-4 text-center rounded-md text-sm hidden"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('userDataForm');
+        const messageBox = document.getElementById('messageBox');
+
+        // Function to show a message in the message box
+        function showMessage(text, isSuccess) {
+            messageBox.textContent = text;
+            messageBox.classList.remove('hidden');
+            if (isSuccess) {
+                messageBox.classList.remove('bg-red-100', 'text-red-800');
+                messageBox.classList.add('bg-green-100', 'text-green-800');
+            } else {
+                messageBox.classList.remove('bg-green-100', 'text-red-800');
+                messageBox.classList.add('bg-red-100', 'text-red-800');
+            }
+        }
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent the form from submitting normally
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                // The URL below points to the Node.js server endpoint
+                const response = await fetch('http://localhost:3000/submit-data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showMessage(result.message, true);
+                    form.reset(); // Clear the form on success
+                } else {
+                    showMessage(result.message, false);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showMessage('Failed to connect to the server. Please ensure the server is running.', false);
+            }
+        });
+    </script>
+</body>
+</html>
